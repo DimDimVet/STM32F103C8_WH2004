@@ -1,0 +1,52 @@
+#include "RCC_F103.h"
+
+void RCC_Config(void)
+{
+		Reset_RCC();// Сбросить RCC
+		
+
+		
+    RCC_HSEConfig(RCC_HSE_ON); // Включить HSE
+    while (RCC_GetFlagStatus(RCC_FLAG_HSERDY) == RESET)// Ожидать HSE
+    {
+        RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9); // Настройка PLL 8 МГц * 9 = 72 МГц
+        RCC_PLLCmd(ENABLE); // Включить PLL
+
+        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET) // Ожидать PLL
+        {
+            RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK); // Устанавливаем PLL как системный такт
+        }
+    }
+}
+
+void Reset_RCC()
+{
+		/* Set HSION bit */
+  RCC->CR |= (uint32_t)0x00000001;
+	
+	/* Reset SW, HPRE, PPRE1, PPRE2, ADCPRE and MCO bits */
+  RCC->CFGR &= (uint32_t)0xF8FF0000;
+	
+	 /* Reset HSEON, CSSON and PLLON bits */
+  RCC->CR &= (uint32_t)0xFEF6FFFF;
+	
+	 /* Reset HSEBYP bit */
+  RCC->CR &= (uint32_t)0xFFFBFFFF;
+	
+	/* Reset PLLSRC, PLLXTPRE, PLLMUL and USBPRE/OTGFSPRE bits */
+  RCC->CFGR &= (uint32_t)0xFF80FFFF;
+	
+	/* Disable all interrupts and clear pending bits  */
+  RCC->CIR = 0x009F0000;
+}
+
+void HSE_CONFIG()
+{
+	/* Reset HSEON bit */
+  RCC->CR &= CR_HSEON_Reset;
+	/* Reset HSEBYP bit */
+  RCC->CR &= CR_HSEBYP_Reset;
+	/* Set HSEON bit */
+      RCC->CR |= CR_HSEON_Set;
+	
+}
