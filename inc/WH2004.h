@@ -3,6 +3,7 @@
 
 #include "stm32f10x.h"
 #include "delay.h"
+#include "RCC_F103.h"
 
 //4битная система, укажем какой пин подключаем (ODRх)
 #define PIN_RS GPIO_ODR_ODR13

@@ -9,5 +9,8 @@ void RCC_HSE_Start(void);
 int READY_HSE(void);
 void RCC_PLL_Config(void);
 int READY_PLL(void);
+//
+void APB2_INIT_PERIPHERY(int RCC_PERIPHERY);
+void APB1_INIT_PERIPHERY(int RCC_PERIPHERY);
 
 #endif

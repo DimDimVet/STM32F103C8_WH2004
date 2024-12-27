@@ -57,3 +57,14 @@ void RCC_HSE_Start()
     RCC->CR |= RCC_CR_HSEON; // Включение HSE
 }
 
+//RCC
+void APB2_INIT_PERIPHERY(int RCC_PERIPHERY)
+{
+    RCC->APB2ENR |= RCC_PERIPHERY;
+}
+
+void APB1_INIT_PERIPHERY(int RCC_PERIPHERY)
+{
+    RCC->APB1ENR |=RCC_PERIPHERY;
+}
+

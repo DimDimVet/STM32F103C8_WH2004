@@ -46,7 +46,7 @@ void SET_BYTE(char byte, int isData)
 void LCD_INIT()
 {
 		//Запустим тактипрования PortB
-		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
+	  APB2_INIT_PERIPHERY(RCC_APB2ENR_IOPBEN);
 
     LCD_PIN_RS();
     LCD_PIN_E();

@@ -1,6 +1,8 @@
 #include "stm32f10x.h"
 #include "WH2004.h"
 #include "RCC_F103.h"
+#include "GPIO_F103.h"
+#include "PWM.h"
 #include <stdio.h>
 
 int main(void)
@@ -9,8 +11,9 @@ int main(void)
 //
 		RCC_Config();
     delay_ms(25);//ждем
+		GPIO_INIT();
     LCD_INIT();// инициализация портов и LCD
-
+		
 		PRINT_LCD("Stroka1!+=", 1, 1);
     PRINT_LCD("stroka2!+=", 2, 1);
     PRINT_LCD("stroka3!+=", 3, 1);
