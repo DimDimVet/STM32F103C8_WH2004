@@ -39,7 +39,6 @@ void SET_BYTE(char byte, int isData)
     LCD_ODR |= PIN_E;
     LCD_ODR &= ~PIN_E;
 		//Конец Фаза2
-		
     delay_us(40);
 }
 
@@ -101,25 +100,31 @@ void LCD_INIT_MODE_4BIT(void)
     delay_ms(40); // Подождите более 40 мс после того, как VDD поднимется до 4,5 В
 
     SET_BYTE(0x30, 0); // Установим RS=0|RW=0|DB7=0|DB6=0|DB5=1|DB4=1|DB3=0|DB2=0|DB1=0|DB0=0
-    delay_us(39);
+    //delay_us(39);
+		delay_ms(1);
 
     SET_BYTE(0x32, 0); // // Установим RS=0|RW=0|DB7=0|DB6=0|DB5=1|DB4=1|DB3=0|DB2=0|DB1=1|DB0=0
-    delay_us(39);
+    //delay_us(39);
+		delay_ms(1);
 
     SET_BYTE(DATA_BUS_4BIT_PAGE0, 0); // включаем режим 4 бит
-    delay_us(37);
+    //delay_us(37);
+		delay_ms(1);
 		
     SET_BYTE(DISPLAY_OFF, 0); // выключаем 
-    delay_us(37);
+    //delay_us(37);
+		delay_ms(1);
 		
     SET_BYTE(CLEAR_DISPLAY, 0); // очищаем 
     delay_ms(2);
 		
     SET_BYTE(ENTRY_MODE_SET, 0); //ставим режим смещение курсора экран
-    delay_us(40);
+    //delay_us(40);
+		delay_ms(1);
 		
     SET_BYTE(DISPLAY_ON, 0);// включаем и убираем курсор
-    delay_us(40);
+    //delay_us(40);
+		delay_ms(1);
 }
 
 void PRINT_LCD(char *str, int row, int position )

@@ -7,26 +7,39 @@
 
 int main(void)
 {
-
 //
 		RCC_Config();
+	
     delay_ms(25);//ждем
 		GPIO_INIT();
-    LCD_INIT();// инициализация портов и LCD
+		TIM1_PWM(80);
 		
+    LCD_INIT();// инициализация портов и LCD
+//		
 		PRINT_LCD("Stroka1!+=", 1, 1);
     PRINT_LCD("stroka2!+=", 2, 1);
     PRINT_LCD("stroka3!+=", 3, 1);
     PRINT_LCD("stroka4!+=", 4, 1);
 		
+		int count=0;
+		
     int number;
     char str [10];
+
+		Set_TIM1_PWM(500);
 		
     while (1)
     {
-        //GPIO_SetBits(GPIOC, GPIO_Pin_13);  // Включить светодиод
+
+				count++;
+				if(count > 50)
+				{
+						count=0;
+						LED_Work();// Включить светодиод
+				}
+
         number++;
-        if(number>10000)
+        if(number>100)
         {
             number=0;
         }
@@ -36,9 +49,6 @@ int main(void)
         PRINT_LCD(str, 2, 14);
         PRINT_LCD(str, 3, 13);
 				PRINT_LCD(str, 4, 12);
-				
-        //delay_s(1);                     // Задержка
-        //GPIO_ResetBits(GPIOC, GPIO_Pin_13); // Выключить светодиод
-        //delay_s(1);
+
     }
 }

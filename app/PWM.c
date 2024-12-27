@@ -1,15 +1,17 @@
 #include "PWM.h"
 
+int arg_Reload=1000;
 
-void TIM1_PWM(int currentFreg, int autoReload)
+void TIM1_PWM(int currentFreg)
 {
     APB2_INIT_PERIPHERY(RCC_APB2ENR_TIM1EN);
     // Настройка таймера 1 для PWM
 
     TIM1->PSC = currentFreg - 1; // делим
 
-    TIM1->ARR = autoReload - 1; // перегружаем
-	
+    //TIM1->ARR = autoReload - 1; // перегружаем
+	  TIM1->ARR = arg_Reload - 1; // перегружаем
+		
 		TIM1->CCER |= TIM_CCER_CC1E | TIM_CCER_CC1P;////настроим на выход канал 1, активный уровень низкий
 		
 		TIM1->BDTR |= TIM_BDTR_MOE; // Включить выходы
@@ -21,9 +23,9 @@ void TIM1_PWM(int currentFreg, int autoReload)
 
 void Set_TIM1_PWM(int level)
 {
-    if (level > 1000)
+    if (level > arg_Reload )// Ограничение
 		{
-			level = 1000; // Ограничение
+			level = 1000;  // Коэффициент заполнения
 		}
 			
     TIM1->CCR1 = level; // Установка

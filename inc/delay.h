@@ -10,5 +10,8 @@
 void delay_us(int us); 
 void delay_ms(int ms); 
 void delay_s(int s);
+int isdelay_s(int s);
+
+void DELAY_INIT(int ticks);
 
 #endif
