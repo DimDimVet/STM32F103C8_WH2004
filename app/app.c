@@ -26,7 +26,7 @@ int main(void)
     int number;
     char str [10];
 
-		Set_TIM1_PWM(500);
+		Set_TIM1_PWM(950);
 		
     while (1)
     {
